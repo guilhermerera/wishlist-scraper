@@ -25,13 +25,13 @@ export async function ScrapeKabum() {
 		const wishlistCards = Array.from(
 			document.querySelectorAll("#main-content main section > div")
 		);
-		//B
+
 		return wishlistCards.map((card) => {
 			const image_url = card.querySelector("img").src;
 
 			const imageUrlPieces = image_url.split("/");
-			const productId = imageUrlPieces[imageUrlPieces.length - 2];
-			const product_url = `https://kabum.com.br/produto/${productId}`;
+			const product_id = imageUrlPieces[imageUrlPieces.length - 2];
+			const product_url = `https://kabum.com.br/produto/${product_id}`;
 
 			const title = card.querySelector(".productInfo h1").textContent;
 			const price = card.querySelector(".productPrice h1").textContent;
@@ -39,6 +39,7 @@ export async function ScrapeKabum() {
 			const on_stock = buy_btn ? true : false;
 
 			return {
+				product_id,
 				image_url,
 				product_url,
 				title,
